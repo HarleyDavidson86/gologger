@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-func log(level Level, logmessage string) {
+func log(level Level, logargs ...interface{}) {
 	if IsLevelEnabled(level) {
-		//2006-01-02 15:04:05.000 [DEBUG  ] - Logmessage
+		//2006-01-02 15:04:05.000 [DEBUG  ] - Logargs
 		fmt.Printf("%s [%-7s] - %s\n",
 			time.Now().Format(timestampFormat),
 			ParseLogLevelToString(level),
-			logmessage)
+			fmt.Sprint(logargs...))
 	}
 }
 
@@ -40,7 +40,7 @@ func Errorf(format string, args ...interface{}) {
 	logf(ErrorLevel, format, args...)
 }
 
-// Prints out Fatal message and terminates application
+// Prints out Fatal args and terminates application
 func Fatalf(format string, args ...interface{}) {
 	logf(FatalLevel, format, args...)
 	os.Exit(1)
@@ -54,36 +54,36 @@ func logf(level Level, format string, args ...interface{}) {
 	log(level, fmt.Sprintf(format, args...))
 }
 
-func Trace(message string) {
-	log(TraceLevel, message)
+func Trace(args ...interface{}) {
+	log(TraceLevel, args...)
 }
 
-func Debug(message string) {
-	log(DebugLevel, message)
+func Debug(args ...interface{}) {
+	log(DebugLevel, args...)
 }
 
-func Info(message string) {
-	log(InfoLevel, message)
+func Info(args ...interface{}) {
+	log(InfoLevel, args...)
 }
 
-func Warn(message string) {
-	log(WarnLevel, message)
+func Warn(args ...interface{}) {
+	log(WarnLevel, args...)
 }
 
-func Warning(message string) {
-	Warn(message)
+func Warning(args ...interface{}) {
+	Warn(args...)
 }
 
-func Error(message string) {
-	log(ErrorLevel, message)
+func Error(args ...interface{}) {
+	log(ErrorLevel, args...)
 }
 
-// Prints out Fatal message and terminates application
-func Fatal(message string) {
-	log(FatalLevel, message)
+// Prints out Fatal args and terminates application
+func Fatal(args ...interface{}) {
+	log(FatalLevel, args...)
 	os.Exit(1)
 }
 
-func Panic(message string) {
-	log(PanicLevel, message)
+func Panic(args ...interface{}) {
+	log(PanicLevel, args...)
 }
