@@ -4,14 +4,23 @@ import (
 	"fmt"
 	stdlog "log"
 	"os"
+	"time"
 )
 
 func log(level Level, logargs ...interface{}) {
 	if IsLevelEnabled(level) {
-		//2006/01/02 15:04:05 [DEBUG  ] - Logargs
-		stdlog.Printf("[%-7s] - %s\n",
-			ParseLogLevelToString(level),
-			fmt.Sprint(logargs...))
+		//Flags of default logger are set to 0, so use gologgers timestamp
+		if stdlog.Flags() == 0 {
+			stdlog.Printf("%s [%-7s] - %s\n",
+				time.Now().Format(timestampFormat),
+				ParseLogLevelToString(level),
+				fmt.Sprint(logargs...))
+		} else {
+			//2006/01/02 15:04:05 [DEBUG  ] - Logargs
+			stdlog.Printf("[%-7s] - %s\n",
+				ParseLogLevelToString(level),
+				fmt.Sprint(logargs...))
+		}
 	}
 }
 
