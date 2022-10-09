@@ -25,7 +25,7 @@ is using the default timestamp:
 
 ```2006-01-02 15:04:05.000 [DEBUG  ] - Logmessage```
 
-So you can customize the prefixes over the functionality of the standard [log package of go](https://pkg.go.dev/log) or by set a [correct timeformat](https://go.dev/src/time/format.go over the function ```SetTimestampFormat```.
+So you can customize the prefixes over the functionality of the standard [log package of go](https://pkg.go.dev/log) or by set a [correct timeformat](https://go.dev/src/time/format.go) over the function ```SetTimestampFormat```.
 
 This gives you also the possibility to connect a packages like [lumberjack](https://github.com/natefinch/lumberjack) to gain the functionality of a rolling log for example.
 
